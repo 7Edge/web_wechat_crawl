@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+<body>
+<div style="width: 200px;margin: 0 auto;">
+    <h1 style="text-align: center;">扫码登录</h1>
+    <img id="userAvatar" style="width: 200px;height: 200px;" src="https://login.weixin.qq.com/qrcode/{{qcode}}" alt="">
+</div>
+
+<script src="https://cdn.bootcss.com/jquery/3.3.0/jquery.min.js"></script>
+<script>
+    $(function () {
+        checkLogin();
+    });
+
+    function checkLogin() {
+        $.ajax({
+            url: '/check/login',
+            method: 'GET',
+            dataType: 'json',
+            success: function (arg) {
+                console.log(arg);
+                checkLogin();
+                if (arg.code === 408) {
+                    checkLogin();
+                } else if (arg.code === 201) {
+                    $('#userAvatar').attr('src', arg.avatar);
+                    checkLogin();
+                } else if (arg.code === 200) {
+                    location.href = "/index"
+                }
+            }
+        })
+    }
+</script>
+</body>
+</html>

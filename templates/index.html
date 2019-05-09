@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+<body>
+    <h1>欢迎使用Web微信:{{init_user_dict.User.NickName}}</h1>
+
+    <h3>最近联系人</h3>
+    <ul>
+        {% for row in init_user_dict.ContactList %}
+            <li>{{row.NickName}}</li>
+        {% endfor %}
+        <li><a href="#">查看所有联系人</a></li>
+    </ul>
+
+    <h3>最近公众号</h3>
+    {% for item in init_user_dict.MPSubscribeMsgList %}
+        <div>
+            <h3>{{item.NickName}}</h3>
+            <ul>
+                {% for msg in item.MPArticleList %}
+                <li><a href="{{msg.Url}}">{{msg.Title}}</a></li>
+                {% endfor %}
+            </ul>
+        </div>
+    {% endfor %}
+
+
+
+</body>
+</html>
