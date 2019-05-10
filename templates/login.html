@@ -23,8 +23,7 @@
             method: 'GET',
             dataType: 'json',
             success: function (arg) {
-                console.log(arg);
-                checkLogin();
+                // checkLogin();
                 if (arg.code === 408) {
                     checkLogin();
                 } else if (arg.code === 201) {
